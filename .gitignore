@@ -1,0 +1,5 @@
+# ignore .env file for environment variables
+.env
+
+# ignore voter data files
+data-processing/wake_county/
