@@ -1,4 +1,7 @@
 flask
 flask-cors
 python-dotenv
-psycopg2-binary
+firebase_admin
+pandas
+fastapi
+fastapi[standard]

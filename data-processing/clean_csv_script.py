@@ -1,5 +1,7 @@
 import pandas as pd
 
+# MUST CD INTO "data-processing" DIRECTORY BEFORE RUNNING THIS SCRIPT
+
 input_file = './wake_county/wake_voters.csv'
 output_file = 'wake_upload.csv'
 
