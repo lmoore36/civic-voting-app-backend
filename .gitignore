@@ -3,3 +3,7 @@
 
 # ignore voter data files
 data-processing/wake_county/
+
+# ignore firebase admin sdk key
+voter-reg-api/secrets/firebase-adminsdk.json
+data-processing/wake_upload.csv
