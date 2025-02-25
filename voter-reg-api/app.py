@@ -3,7 +3,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore, auth
 
 # Initialize Firebase
-cred = credentials.Certificate("./secrets/firebase_config.json")  # Path to your Firebase JSON
+cred = credentials.Certificate("/workspaces/civic-voting-project/voter-reg-api/secrets/firebase_config.json")  # Path to your Firebase JSON
 firebase_admin.initialize_app(cred)
 db = firestore.client()  # Firestore database reference
 
