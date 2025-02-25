@@ -2,8 +2,10 @@
 .env
 
 # ignore voter data files
-data-processing/wake_county/
+data-processing/wake_county/*.csv
+data-processing/wake_county/*.txt
+data-processing/wake_upload.csv
 
 # ignore firebase admin sdk key
 voter-reg-api/secrets/firebase-adminsdk.json
-data-processing/wake_upload.csv
+
