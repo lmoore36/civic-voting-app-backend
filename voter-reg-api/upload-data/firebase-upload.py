@@ -1,40 +1,53 @@
-import csv
 import firebase_admin
 from firebase_admin import credentials, firestore
+import csv
 
-# Initialize Firebase
-cred = credentials.Certificate("../secrets/firebase_config.json")
-firebase_admin.initialize_app(cred)
+SERVICE_ACCOUNT_FILE = '../secrets/firebase_config.json'
+CSV_FILE = '../../data-processing/wake_upload.csv'
+COLLECTION_NAME = 'registeredVoters'
+
+if not firebase_admin._apps:
+    cred = credentials.Certificate(SERVICE_ACCOUNT_FILE)
+    firebase_admin.initialize_app(cred)
+
 db = firestore.client()
 
-csv_file = "../../data-processing/wake_upload.csv"
+def upload_csv_to_firestore():
+    print(f"Processing CSV file: {CSV_FILE}")
 
-# Create a batch object
-batch = db.batch()
+    try:
+        with open(CSV_FILE, mode='r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            processed_rows = 0
 
-with open(csv_file, newline="", encoding="utf-8") as file:
-    reader = csv.DictReader(file)
-    for row in reader:
-        voter_reg_num = row["voter_reg_num"]
-        doc_ref = db.collection("registeredvoters").document(voter_reg_num)
-        doc = doc_ref.get()
+            for row in reader:
+                voter_reg_num = row.get("voter_reg_num")
 
-        if not doc.exists:
-            voter_data = {
-                "first_name": row["first_name"],
-                "last_name": row["last_name"],
-                "street_address": row["res_street_address"],
-                "city": row["res_city_desc"],
-                "birth_year": int(row["birth_year"]),
-                "gender": row["gender_code"],
-                "race": row["race_code"],
-                "ethnicity": row["ethnic_code"],
-                "party": row["party_cd"],
-            }
-            # Add the set operation to the batch
-            batch.set(doc_ref, voter_data)
+                if not voter_reg_num:
+                    print(f"Skipping row without voter_reg_num.")
+                    continue
 
-# Commit the batch write
-batch.commit()
+                voter_data = {
+                    "first_name": row.get("first_name"),
+                    "last_name": row.get("last_name"),
+                    "street_address": row.get("res_street_address"),
+                    "city": row.get("res_city_desc"),
+                    "birth_year": int(row.get("birth_year")) if row.get("birth_year") else None,
+                    "gender": row.get("gender_code"),
+                    "race": row.get("race_code"),
+                    "ethnicity": row.get("ethnic_code"),
+                    "party": row.get("party_cd"),
+                }
 
-print("Data uploaded successfully!")
+                doc_ref = db.collection(COLLECTION_NAME).document(str(voter_reg_num))
+                doc_ref.set(voter_data)
+
+                processed_rows += 1
+
+            print(f"Successfully uploaded {processed_rows} rows to Firestore.")
+
+    except Exception as e:
+        print(f"Error processing file {CSV_FILE}: {e}")
+
+if __name__ == '__main__':
+    upload_csv_to_firestore()

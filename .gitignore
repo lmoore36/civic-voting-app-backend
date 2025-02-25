@@ -12,3 +12,5 @@ voter-reg-api/secrets/firebase-adminsdk.json
 voter-reg-api/upload-data/wake_upload.csv
 voter-reg-api/database.py
 voter-reg-api/secrets/firebase_config.json
+data-processing/wake_upload_v2.csv
+voter-reg-api/app.yaml
