@@ -1,5 +1,11 @@
 from pydantic import BaseModel
 from typing import Optional
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+google_credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+voters_csv = os.getenv("VOTERS_CSV_FILE")
 
 
 class ValidVoter(BaseModel):

@@ -1,23 +1,20 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
 import csv
-
-SERVICE_ACCOUNT_FILE = "../secrets/firebase_config.json"
-CSV_FILE = "../../data-processing/wake_upload.csv"
-COLLECTION_NAME = "registeredVoters"
+from models import google_credentials, voters_csv
 
 if not firebase_admin._apps:
-    cred = credentials.Certificate(SERVICE_ACCOUNT_FILE)
+    cred = credentials.Certificate(google_credentials)
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
 
 def upload_csv_to_firestore():
-    print(f"Processing CSV file: {CSV_FILE}")
+    print(f"Processing CSV file: {voters_csv}")
 
     try:
-        with open(CSV_FILE, mode="r", encoding="utf-8") as file:
+        with open(voters_csv, mode="r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
             processed_rows = 0
 
