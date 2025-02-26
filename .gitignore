@@ -1,16 +1,11 @@
-# ignore .env file for environment variables
-.env
 
-# ignore voter data files
-data-processing/wake_county/*.csv
-data-processing/wake_county/*.txt
-data-processing/wake_upload.csv
 
-# ignore firebase admin sdk key
-voter-reg-api/secrets/firebase-adminsdk.json
+app/data-cleaning/wake_upload_v2.csv
 
-voter-reg-api/upload-data/wake_upload.csv
-voter-reg-api/database.py
-voter-reg-api/secrets/firebase_config.json
-data-processing/wake_upload_v2.csv
-voter-reg-api/app.yaml
+app/data-cleaning/wake_county/wake_voters.csv
+
+app/backend-api/secrets/firebase_config.json
+app/data-cleaning/wake_upload.csv
+app/backend-api/app.yaml
+app/backend-api/.flaskenv
+app/data-cleaning/wake_county/wake.txt
