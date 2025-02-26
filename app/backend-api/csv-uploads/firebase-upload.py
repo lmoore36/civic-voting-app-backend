@@ -2,9 +2,9 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import csv
 
-SERVICE_ACCOUNT_FILE = '../secrets/firebase_config.json'
-CSV_FILE = '../../data-processing/wake_upload.csv'
-COLLECTION_NAME = 'registeredVoters'
+SERVICE_ACCOUNT_FILE = "../secrets/firebase_config.json"
+CSV_FILE = "../../data-processing/wake_upload.csv"
+COLLECTION_NAME = "registeredVoters"
 
 if not firebase_admin._apps:
     cred = credentials.Certificate(SERVICE_ACCOUNT_FILE)
@@ -12,11 +12,12 @@ if not firebase_admin._apps:
 
 db = firestore.client()
 
+
 def upload_csv_to_firestore():
     print(f"Processing CSV file: {CSV_FILE}")
 
     try:
-        with open(CSV_FILE, mode='r', encoding='utf-8') as file:
+        with open(CSV_FILE, mode="r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
             processed_rows = 0
 
@@ -24,7 +25,7 @@ def upload_csv_to_firestore():
                 voter_reg_num = row.get("voter_reg_num")
 
                 if not voter_reg_num:
-                    print(f"Skipping row without voter_reg_num.")
+                    print("Skipping row without voter_reg_num.")
                     continue
 
                 voter_data = {
@@ -32,7 +33,9 @@ def upload_csv_to_firestore():
                     "last_name": row.get("last_name"),
                     "street_address": row.get("res_street_address"),
                     "city": row.get("res_city_desc"),
-                    "birth_year": int(row.get("birth_year")) if row.get("birth_year") else None,
+                    "birth_year": (
+                        int(row.get("birth_year")) if row.get("birth_year") else None
+                    ),
                     "gender": row.get("gender_code"),
                     "race": row.get("race_code"),
                     "ethnicity": row.get("ethnic_code"),
@@ -49,5 +52,6 @@ def upload_csv_to_firestore():
     except Exception as e:
         print(f"Error processing file {CSV_FILE}: {e}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     upload_csv_to_firestore()

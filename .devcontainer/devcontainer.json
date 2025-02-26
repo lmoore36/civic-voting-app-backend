@@ -3,5 +3,20 @@
   "build": {
       "dockerfile": "Dockerfile",
       "context": "."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.black-formatter",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.isort",
+        "ms-azuretools.vscode-docker",
+        "aaron-bond.better-comments",
+        "christian-kohler.path-intellisense",
+        "mechatroner.rainbow-csv"
+      ]
+    }
   }
 }

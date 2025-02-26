@@ -2,27 +2,27 @@ import pandas as pd
 
 # MUST CD INTO "data-processing" DIRECTORY BEFORE RUNNING THIS SCRIPT
 
-input_file = './wake_county/wake_voters.csv'
-output_file = 'wake_upload.csv'
+input_file = "./wake_county/wake_voters.csv"
+output_file = "wake_upload.csv"
 
 columns_to_keep = [
-    "voter_reg_num", 
-    "last_name", 
-    "first_name", 
+    "voter_reg_num",
+    "last_name",
+    "first_name",
     "res_street_address",
     "race_code",
     "ethnic_code",
     "party_cd",
     "gender_code",
     "birth_year",
-    "res_city_desc"
+    "res_city_desc",
 ]
 
 # read the csv
 df = pd.read_csv(input_file, low_memory=False)
 
 # filter rows where city is APEX
-filtered_df = df[df['res_city_desc'].str.strip().str.upper() == 'APEX']
+filtered_df = df[df["res_city_desc"].str.strip().str.upper() == "APEX"]
 
 # remove all columns not in the keep list
 df = filtered_df[columns_to_keep]

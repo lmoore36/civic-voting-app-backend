@@ -2,7 +2,6 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-
 class ValidVoter(BaseModel):
     voter_reg_num: int
     last_name: str
@@ -15,10 +14,12 @@ class ValidVoter(BaseModel):
     birth_year: int
     res_city_desc: str
 
+
 class UserAccount(BaseModel):
     voter_reg_num: int
     email: str
     password_hash: str
+
 
 class VoteData(BaseModel):
     voter_reg_num: int
@@ -26,4 +27,3 @@ class VoteData(BaseModel):
     issue_2: str
     issue_other: Optional[str] = None
     write_in: Optional[str] = None
-
