@@ -7,7 +7,3 @@ app/data-cleaning/wake_upload.csv
 
 # ignore firebase config secrets
 app/backend-api/secrets/firebase_config.json
-app/backend-api/.flaskenv
-
-# ignore local env variables
-.env
