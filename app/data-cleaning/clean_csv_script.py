@@ -2,7 +2,7 @@ import pandas as pd
 
 # MUST CD INTO "data-processing" DIRECTORY BEFORE RUNNING THIS SCRIPT
 
-input_file = "./wake_county/wake_voters.csv"
+input_file = "/workspaces/civic-voting-project/app/data-cleaning/wake_county/wake_voters.csv"
 output_file = "wake_upload.csv"
 
 columns_to_keep = [
@@ -15,7 +15,7 @@ columns_to_keep = [
     "party_cd",
     "gender_code",
     "birth_year",
-    "res_city_desc",
+    "res_city_desc"
 ]
 
 # read the csv

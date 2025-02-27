@@ -7,3 +7,4 @@ app/data-cleaning/wake_upload.csv
 
 # ignore firebase config secrets
 app/backend-api/secrets/firebase_config.json
+

@@ -15,7 +15,8 @@
         "ms-azuretools.vscode-docker",
         "aaron-bond.better-comments",
         "christian-kohler.path-intellisense",
-        "mechatroner.rainbow-csv"
+        "mechatroner.rainbow-csv",
+        "GrapeCity.gc-excelviewer"
       ]
     }
   }
